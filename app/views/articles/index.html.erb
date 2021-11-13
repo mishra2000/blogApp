@@ -6,8 +6,8 @@
   <% @articles.each do |article| %>
     <li>
       <%= link_to article.title, article %>
-      <%# <%= article.body %>
-      <%= article.user_id%>
+      <%# <%= article.body %>&nbsp by &nbsp
+      <%= article.user.email%>
     </li>
   <% end %>
 

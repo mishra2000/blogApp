@@ -1,6 +1,9 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!,except: [:index,:show]
   before_action :correct_user, only: [:edit,:update,:destroy]
+  def myBlogs
+    @articles = Article.all
+  end
   def index
     @articles = Article.all
   end

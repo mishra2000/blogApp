@@ -1,7 +1,9 @@
 class CommentsController < ApplicationController
   def create
     @article = Article.find(params[:article_id])
-    @comment = @article.comments.create(comment_params)
+    if comment_params["user_id"].to_s==current_user.id.to_s
+      @comment = @article.comments.create(comment_params)
+    end
     redirect_to article_path(@article)
   end
   def destroy

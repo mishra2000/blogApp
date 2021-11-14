@@ -4,15 +4,21 @@
   <div>
     <%= form.label :title %><br>
     <%= form.text_field :title %>
+    <% article.errors.full_messages_for(:title).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
   </div>
 
   <div>
     <%= form.label :body %><br>
     <%= form.text_area :body %>
+    <% article.errors.full_messages_for(:body).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
   </div>
   <div>
-    <%= form.label :user %><br>
-    <%= form.text_area :user_id,id: :article_user_id, value: current_user.id %>
+    <%# <%= form.label :user %>
+    <%= form.hidden_field :user_id,id: :article_user_id, value: current_user.id %>
   </div>
   <div>
     <%= form.submit %>

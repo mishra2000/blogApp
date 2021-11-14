@@ -24,11 +24,13 @@ class ArticlesController < ApplicationController
     end
   end
   def edit
-    @article = Article.find(params[:id])
+    # @article = Article.find(params[:id])
+    @article = current_user.articles.find(params[:id])
   end
   def update
-    @article = Article.find(params[:id])
-    if @article.update(article_params)
+    # @article = Article.find(params[:id])
+    @article = current_user.articles.find(params[:id])
+    if @article.user_id.to_s==article_params["user_id"].to_s && @article.update(article_params)
       redirect_to @article
     else
       render :edit

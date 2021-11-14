@@ -1,11 +1,16 @@
+<div style="padding-left:10px;padding-right:10px">
+<h2>Your post</h2>
+<%count=0%>
 <ul>
   <% @articles.each do |article| %>
+  <%count=count+1%>
     <% if current_user.id === article.user_id %>
     <li>
-      <%= link_to article.title, article %>
+      <%= link_to article.title, article ,style:"text-decoration:none;color:black"%>
       <%# <%= article.body %>
       <%# <%= article.user.email%>
     </li>
     <%end%>
   <% end %>
 </ul>
+</div>

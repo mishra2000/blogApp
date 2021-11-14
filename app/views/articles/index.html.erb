@@ -1,14 +1,43 @@
 <span id="notice"><%= notice %></span>
-<h1>Welcome to the blog</h1>
-<%= link_to "New Article", new_article_path %>
-<h2> these are available articles </h2>
+
+
+
+
 <ul>
+  <% count=1 %>
   <% @articles.each do |article| %>
-    <li>
-      <%= link_to article.title, article %>
-      <%# <%= article.body %>&nbsp by &nbsp
-      <%= article.user.email%>
-    </li>
+  <% if count==1 %>
+  <%count=count+1%><br/>
+  <h3 style="text-align:center">Most Recent Upload</h3>
+  <div class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 97%;margin-bottom:15px;background:grey;background-image: linear-gradient(white, yellow);border-color:red">
+    <!-- <img src="..." class="card-img-top" alt="..."> -->
+
+    <div class="card-body">
+      <h5 class="card-title"><%=article.title%></h5>
+      <p class="card-text"><%= article.body[0..article.body.length*0.50]+"...." %></p>
+      <p class="card-text">Author: <%=article.user.email%></p>
+      <%= link_to "Read More", article,class:"btn btn-primary" %><br/>
+    </div>
+  </div>
+  <h3 style="text-align:center"> Other articles </h3>
+  <%else%>
+
+  <div class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 97%;margin-bottom:15px;background:grey;background-image: linear-gradient(white, yellow);border-color:red">
+    <!-- <img src="..." class="card-img-top" alt="..."> -->
+    <div class="card-body">
+      <h5 class="card-title"><%=article.title%></h5>
+      <p class="card-text"><%= article.body[0..article.body.length*0.25]+"...." %></p>
+      <p class="card-text">Author: <%=article.user.email%></p>
+      <%= link_to "Read More", article,class:"btn btn-primary" %><br/>
+    </div>
+  </div>
+  <%end%>
+
+    <!-- <li>
+
+      <br/>&nbsp by &nbsp
+      <%# <%= article.user.email%> %>
+    </li> -->
   <% end %>
 
 </ul>

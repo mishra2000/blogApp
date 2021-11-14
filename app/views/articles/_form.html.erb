@@ -3,15 +3,15 @@
 <%= form_with model: @article do |form| %>
   <div>
     <%= form.label :title %><br>
-    <%= form.text_field :title %>
+    <%= form.text_field :title ,style:"border-radius:5px"%>
     <% article.errors.full_messages_for(:title).each do |message| %>
-      <div><%= message %></div>
+      <div class="alert alert-warning alert-dismissible fade show"><%= message %></div>
     <% end %>
   </div>
 
   <div>
     <%= form.label :body %><br>
-    <%= form.text_area :body %>
+    <%= form.text_area :body,style:"width:98%;height:60vh;border-radius:5px"  %>
     <% article.errors.full_messages_for(:body).each do |message| %>
       <div><%= message %></div>
     <% end %>
@@ -21,6 +21,6 @@
     <%= form.hidden_field :user_id,id: :article_user_id, value: current_user.id %>
   </div>
   <div>
-    <%= form.submit %>
+    <%= form.submit class:"btn btn-success",style:"float:left"%>
   </div>
 <% end %>

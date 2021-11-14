@@ -1,37 +1,43 @@
-<%= link_to "home", articles_path %> <br/>
+<div style="width:100%;height:100%;padding-left:10px;padding-right:10px">
+<%# <%= link_to "home", articles_path %> <br/>
 <span id="notice"><%= notice %></span>
-<h1><%= @article.title %></h1>
+<h1 style="text-align:center"><%= @article.title %></h1>
 
-<p><%= @article.body %></p>
+<p><%= @article.body %></p><br/><p style="float:right">author:- <%=@article.user.email%></p>
 <% if user_signed_in? && (current_user.id === @article.user_id) %>
-<%= link_to "Edit",edit_article_path(@article) %>
-<%= link_to "Delete",article_path(@article),method: :delete, data:{confirm: "Sure to delete?"}%>
+<%= link_to "Edit",edit_article_path(@article) ,class:"btn btn-dark"%>
+<%= link_to "Delete",article_path(@article),method: :delete, data:{confirm: "Sure to delete?"},class:"btn btn-danger"%>
 <% end %>
-
+<br/><br/>
 <%# view comments %>
 
-<h2>Comments</h2>
+<h4>Comments</h4>
+<ul>
+
 <% @article.comments.each do |comment| %>
-  <p>
+<li>
+  <p style="font-size:15px">
     <!-- <strong>Commenter:</strong> -->
-    <%= comment.commenter %> &nbsp wrote &nbsp   <%= comment.body %>
-  </p>
+    <%= comment.commenter %>  wrote "<%= comment.body %>"&nbsp&nbsp
+
   <%if (user_signed_in? && (comment.user_id==current_user.id))||(user_signed_in? && current_user.id== @article.user_id)%>
-  <p>
-  <%= link_to 'Destroy Comment', [comment.article, comment],
+
+  <%= link_to 'Delete', [comment.article, comment],
               method: :delete,
-              data: { confirm: "Are you sure?" } %>
+              data: { confirm: "Are you sure?" },style:"text-decoration:none;color:black" %>
   </p>
   <%end%>
+  </li>
 <%end %>
+
+</ul>
 <% if @article.comments.empty? %>
   <p>Be the first one to comment</p>
 <%end%>
 
 <%# comment form %>
 <% if user_signed_in? %>
-
-<h2>Add a comment:</h2>
+<h4>Add a comment:</h4>
 <%= form_with model: [ @article, @article.comments.build ] do |form| %>
   <p>
     <%# <%= form.label :commenter %>
@@ -39,11 +45,12 @@
   </p>
   <p>
     <%# <%= form.label :body %>
-    <%= form.text_area :body ,placeholder: "Add comment"%>
+    <%= form.text_area :body ,rows:1,placeholder: "Add comment",style:"border-radius:5px"%>
   </p>
   <%= form.hidden_field :user_id, value: current_user.id %>
   <p>
-    <%= form.submit :Comment%>
+    <%= form.submit :Comment ,class:"btn btn-dark"%>
   </p>
 <%end%>
 <%end%>
+<div>

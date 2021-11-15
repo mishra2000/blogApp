@@ -1,11 +1,13 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!,except: [:index,:show]
   before_action :correct_user, only: [:edit,:update,:destroy]
+
   def myblogs
     @articles = Article.all
   end
   def index
-    @articles = Article.all.order("created_at DESC")
+    @articles = Article.all.order("created_at DESC").paginate(page: params[:page], per_page: 3)
+
   end
   def show
     @article = Article.find(params[:id])

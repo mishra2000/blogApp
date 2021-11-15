@@ -1,6 +1,7 @@
 <span id="notice"><%= notice %></span>
 
-
+<%if !Article.all.empty? %>
+<% puts "here calling@@@@@@@@2"%>
 <%= render(:partial => "articles/recentUpload", :locals => {:article => Article.all.order("created_at DESC").first})%>
   <h3 style="text-align:center"> Other articles </h3>
 <ul>
@@ -19,8 +20,13 @@
   </div>
 
   <% end %>
+
   <div class="digg_pagination" style="background:none;margin-left:38%;margin-bottom:100px">
 
       <%= will_paginate @posts, :container => false %>
     </div>
 </ul>
+<%else%>
+<br/><br/><br/>
+<h5 style="text-align:center">No blogs to read!! Try creating one </h5>
+<%end%>
